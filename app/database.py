@@ -76,10 +76,37 @@ def get_sync_session():
 
 async def init_db():
     """Initialise la base de données."""
+    import os
+    from urllib.parse import urlparse
+    
+    # Log de la configuration de la base de données
     logger.info(
         "Initialisation de la base de données",
-        database_url=settings.database_url
+        database_url=settings.database_url,
+        database_url_sync=settings.database_url_sync
     )
+    
+    # Pour SQLite, afficher le chemin absolu du fichier
+    if settings.database_url.startswith("sqlite"):
+        parsed_url = urlparse(settings.database_url)
+        db_path = parsed_url.path
+        if db_path.startswith("///"):
+            # Chemin absolu : sqlite:///path/to/db.db
+            actual_path = db_path[3:]  # Enlever les 3 premiers /
+        else:
+            # Chemin relatif : sqlite://./db.db
+            actual_path = db_path[1:]  # Enlever le premier /
+            
+        # Résoudre le chemin complet
+        full_path = os.path.abspath(actual_path)
+        
+        logger.info(
+            "Configuration SQLite détectée",
+            db_file_path=actual_path,
+            absolute_path=full_path,
+            file_exists=os.path.exists(full_path),
+            working_directory=os.getcwd()
+        )
     
     async with async_engine.begin() as conn:
         # Créer toutes les tables
