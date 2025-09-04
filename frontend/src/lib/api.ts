@@ -177,7 +177,7 @@ export interface OpportunitiesResponse {
 // Projets
 export const projectsApi = {
   getAll: (page = 1, per_page = 20) =>
-    apiClient.get<PaginatedResponse<Project>>('/projects/', {
+    apiClient.get<PaginatedResponse<Project>>('/projects', {
       params: { page, per_page },
     }),
 
@@ -185,7 +185,7 @@ export const projectsApi = {
     apiClient.get<Project>(`/projects/${id}`),
 
   create: (data: CreateProjectRequest) =>
-    apiClient.post<Project>('/projects/', data),
+    apiClient.post<Project>('/projects', data),
 
   update: (id: string, data: Partial<CreateProjectRequest>) =>
     apiClient.put<Project>(`/projects/${id}`, data),
