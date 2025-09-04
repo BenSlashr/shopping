@@ -135,7 +135,7 @@ export default function Settings() {
 
         try {
           // Récupération des vrais mots-clés depuis l'API
-          const keywordsResponse = await apiClient.get(`/api/v1/projects/${currentProject.id}/keywords`);
+          const keywordsResponse = await apiClient.get(`/projects/${currentProject.id}/keywords`);
           
           if (keywordsResponse.data && keywordsResponse.data.keywords) {
             // Conversion des données API vers le format attendu
@@ -340,7 +340,7 @@ export default function Settings() {
       });
 
       // Appeler l'API pour sauvegarder en base de données
-      const response = await apiClient.post(`/api/v1/projects/${currentProject.id}/keywords`, {
+      const response = await apiClient.post(`/projects/${currentProject.id}/keywords`, {
         keywords: keywordsToAdd
       });
 
@@ -432,7 +432,7 @@ export default function Settings() {
     try {
       showMessage(`Lancement de l'analyse SERP pour ${activeKeywords.length} mots-clés...`, 'success');
       
-      const response = await apiClient.post(`/api/v1/scraping/projects/${currentProject.id}/analyze`);
+      const response = await apiClient.post(`/scraping/projects/${currentProject.id}/analyze`);
       
       if (response.data) {
         showMessage(

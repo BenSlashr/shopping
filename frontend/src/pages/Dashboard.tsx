@@ -64,7 +64,7 @@ export default function Dashboard() {
       
       // Charger le dashboard principal
       const timestamp = Date.now();
-      const dashboardResponse = await apiClient.get(`/api/v1/analytics/dashboard/${projectId}?_t=${timestamp}`);
+      const dashboardResponse = await apiClient.get(`/analytics/dashboard/${projectId}?_t=${timestamp}`);
       setData(dashboardResponse.data);
 
       // Charger les données de tendances en parallèle

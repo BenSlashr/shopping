@@ -6,7 +6,7 @@ export const config = {
   // URL de l'API backend
   apiUrl: import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'development' 
     ? 'http://localhost:8000' 
-    : '/shopping'),
+    : '/shopping/api/v1'),
   
   // Mode de développement
   isDevelopment: import.meta.env.MODE === 'development',

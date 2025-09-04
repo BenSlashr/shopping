@@ -34,7 +34,7 @@ export default function PositionMatrix() {
     try {
       setLoading(true);
       setError(null);
-      const response = await apiClient.get(`/api/v1/analytics/position-matrix/${projectId}`);
+      const response = await apiClient.get(`/analytics/position-matrix/${projectId}`);
       setData(response.data);
     } catch (err: any) {
       console.error('Position Matrix error:', err);

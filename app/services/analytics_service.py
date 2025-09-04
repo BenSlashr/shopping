@@ -438,12 +438,15 @@ class AnalyticsService:
     # Autres méthodes simplifiées pour éviter les erreurs
     async def get_position_matrix(self, project_id: str) -> PositionMatrixResponse:
         """Position matrix simplifiée."""
+        start_date = datetime.utcnow() - timedelta(days=30)
+        end_date = datetime.utcnow()
+        
         return PositionMatrixResponse(
             project_id=project_id,
-            date_range={"start": datetime.utcnow() - timedelta(days=30), "end": datetime.utcnow()},
-            keywords_positions={},
-            competitors_domains=[],
-            matrix_data=[]
+            period_start=start_date,
+            period_end=end_date,
+            keywords=[],
+            competitor_domains=[]
         )
     
     async def get_opportunities(self, project_id: str) -> OpportunitiesResponse:

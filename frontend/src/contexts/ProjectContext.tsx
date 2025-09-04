@@ -52,7 +52,7 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
       setError(null);
       
       // Récupérer les vrais projets depuis l'API
-      const response = await apiClient.get('/api/v1/projects');
+      const response = await apiClient.get('/projects');
       const realProjects = response.data.projects || [];
       
       setProjects(realProjects);
@@ -133,7 +133,7 @@ export const ProjectProvider: React.FC<ProjectProviderProps> = ({ children }) =>
       };
       
       // Appeler l'API pour créer le projet
-      const response = await apiClient.post('/api/v1/projects', newProjectData);
+      const response = await apiClient.post('/projects', newProjectData);
       const newProject = response.data;
       
       // Mettre à jour la liste des projets

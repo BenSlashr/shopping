@@ -177,45 +177,45 @@ export interface OpportunitiesResponse {
 // Projets
 export const projectsApi = {
   getAll: (page = 1, per_page = 20) =>
-    apiClient.get<PaginatedResponse<Project>>('/api/v1/projects/', {
+    apiClient.get<PaginatedResponse<Project>>('/projects/', {
       params: { page, per_page },
     }),
 
   getById: (id: string) =>
-    apiClient.get<Project>(`/api/v1/projects/${id}`),
+    apiClient.get<Project>(`/projects/${id}`),
 
   create: (data: CreateProjectRequest) =>
-    apiClient.post<Project>('/api/v1/projects/', data),
+    apiClient.post<Project>('/projects/', data),
 
   update: (id: string, data: Partial<CreateProjectRequest>) =>
-    apiClient.put<Project>(`/api/v1/projects/${id}`, data),
+    apiClient.put<Project>(`/projects/${id}`, data),
 
   delete: (id: string) =>
-    apiClient.delete(`/api/v1/projects/${id}`),
+    apiClient.delete(`/projects/${id}`),
 };
 
 // Analytics
 export const analyticsApi = {
   getDashboard: (projectId: string) =>
-    apiClient.get<DashboardResponse>(`/api/v1/analytics/dashboard/${projectId}`),
+    apiClient.get<DashboardResponse>(`/analytics/dashboard/${projectId}`),
 
   getShareOfVoice: (projectId: string, periodStart?: string, periodEnd?: string) =>
-    apiClient.get<ShareOfVoiceResponse>(`/api/v1/analytics/share-of-voice/${projectId}`, {
+    apiClient.get<ShareOfVoiceResponse>(`/analytics/share-of-voice/${projectId}`, {
       params: { period_start: periodStart, period_end: periodEnd },
     }),
 
   getPositionMatrix: (projectId: string, periodStart?: string, periodEnd?: string) =>
-    apiClient.get<PositionMatrixResponse>(`/api/v1/analytics/position-matrix/${projectId}`, {
+    apiClient.get<PositionMatrixResponse>(`/analytics/position-matrix/${projectId}`, {
       params: { period_start: periodStart, period_end: periodEnd },
     }),
 
   getOpportunities: (projectId: string, periodStart?: string, periodEnd?: string) =>
-    apiClient.get<OpportunitiesResponse>(`/api/v1/analytics/opportunities/${projectId}`, {
+    apiClient.get<OpportunitiesResponse>(`/analytics/opportunities/${projectId}`, {
       params: { period_start: periodStart, period_end: periodEnd },
     }),
 
   getTrends: (projectId: string, metricType: string = 'share_of_voice', periodType: string = 'day') =>
-    apiClient.get(`/api/v1/analytics/trends/${projectId}`, {
+    apiClient.get(`/analytics/trends/${projectId}`, {
       params: { metric_type: metricType, period_type: periodType },
     }),
 };
@@ -223,13 +223,13 @@ export const analyticsApi = {
 // Scraping
 export const scrapingApi = {
   testDataForSEO: () =>
-    apiClient.get('/api/v1/test-dataforseo'),
+    apiClient.get('/test-dataforseo'),
 
   scrapeProject: (projectId: string) =>
-    apiClient.post(`/api/v1/scrape/project/${projectId}`),
+    apiClient.post(`/scraping/projects/${projectId}/analyze`),
 
   scrapeKeyword: (projectId: string, keywordId: string) =>
-    apiClient.post(`/api/v1/scrape/keyword/${projectId}/${keywordId}`),
+    apiClient.post(`/scraping/projects/${projectId}/keywords/${keywordId}/analyze`),
 };
 
 // Competitors
@@ -251,13 +251,13 @@ export interface CreateCompetitorRequest {
 
 export const competitorsApi = {
   getByProject: (projectId: string) =>
-    apiClient.get<{ competitors: Competitor[], total: number }>(`/api/v1/projects/${projectId}/competitors`),
+    apiClient.get<{ competitors: Competitor[], total: number }>(`/projects/${projectId}/competitors`),
 
   create: (projectId: string, data: CreateCompetitorRequest) =>
-    apiClient.post<Competitor>(`/api/v1/projects/${projectId}/competitors`, data),
+    apiClient.post<Competitor>(`/projects/${projectId}/competitors`, data),
 
   delete: (projectId: string, competitorId: string) =>
-    apiClient.delete(`/api/v1/projects/${projectId}/competitors/${competitorId}`),
+    apiClient.delete(`/projects/${projectId}/competitors/${competitorId}`),
 };
 
 // Health check

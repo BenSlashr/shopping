@@ -38,7 +38,7 @@ const KeywordPositions: React.FC = () => {
     
     try {
       const timestamp = Date.now();
-      const response = await apiClient.get(`/api/v1/analytics/keywords-positions/${projectId}?_t=${timestamp}`);
+      const response = await apiClient.get(`/analytics/keywords-positions/${projectId}?_t=${timestamp}`);
       setData(response.data);
     } catch (err: any) {
       console.error('Keyword positions error:', err);

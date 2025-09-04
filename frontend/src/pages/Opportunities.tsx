@@ -39,7 +39,7 @@ export default function Opportunities() {
     try {
       setLoading(true);
       setError(null);
-      const response = await apiClient.get(`/api/v1/analytics/opportunities/${projectId}`);
+      const response = await apiClient.get(`/analytics/opportunities/${projectId}`);
       setData(response.data);
     } catch (err: any) {
       console.error('Opportunities error:', err);

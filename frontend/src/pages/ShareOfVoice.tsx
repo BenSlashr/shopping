@@ -38,7 +38,7 @@ export default function ShareOfVoice() {
       setError(null);
       
       // Charger les données Share of Voice
-      const response = await apiClient.get(`/api/v1/analytics/share-of-voice/${projectId}`);
+      const response = await apiClient.get(`/analytics/share-of-voice/${projectId}`);
       setData(response.data);
 
       // Charger les données de tendances
